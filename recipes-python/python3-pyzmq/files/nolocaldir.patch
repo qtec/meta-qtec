@@ -1,0 +1,20 @@
+diff --git a/setup.py b/setup.py
+index c3a2879b4cd2..84b7bb3954b1 100755
+--- a/setup.py
++++ b/setup.py
+@@ -726,6 +726,7 @@ class Configure(build_ext):
+             self.finish_run()
+             return
+         
++        '''
+         # try fallback on /usr/local on *ix if no prefix is given
+         if not zmq_prefix and not sys.platform.startswith('win'):
+             info("Failed with default libzmq, trying again with /usr/local")
+@@ -744,6 +745,7 @@ class Configure(build_ext):
+                 # settings for the extensions with /usr/local prefix
+                 self.finish_run()
+                 return
++        '''
+         
+         # finally, fallback on bundled
+         

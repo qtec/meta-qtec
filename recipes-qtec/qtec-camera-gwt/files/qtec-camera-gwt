@@ -1,0 +1,38 @@
+#!/bin/bash
+#
+### BEGIN INIT INFO
+# Provides: qtec-camera-gwt
+# Required-Start: $local_fs $remote_fs dbus
+# Required-Stop: $local_fs $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+### END INIT INFO
+
+PIDFILE=/var/run/qtec-camera-gwt.pid
+
+case "$1" in
+  start)
+       echo "Starting GWT Camera"
+       cd /usr/share/gwt_camera
+       nice -n 19 sh runner.sh 2>/var/log/gwt_camera.err >/var/log/gwt_camera.log &
+       echo $! > $PIDFILE
+       echo Done.
+
+  ;;
+
+  stop)
+	pkill -P $(cat $PIDFILE)
+  ;;
+
+  restart)
+	$0 stop
+        sleep 1
+        $0 start
+  ;;
+
+  *)
+        echo "usage: $0 { start | stop | restart }"
+  ;;
+esac
+
+exit 0

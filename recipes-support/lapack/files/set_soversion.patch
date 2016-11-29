@@ -1,0 +1,51 @@
+diff --git a/BLAS/SRC/CMakeLists.txt b/BLAS/SRC/CMakeLists.txt
+index e99ff79a012f..a93112589859 100644
+--- a/BLAS/SRC/CMakeLists.txt
++++ b/BLAS/SRC/CMakeLists.txt
+@@ -141,4 +141,8 @@ if(UNIX)
+   target_link_libraries(blas m)
+ endif()
+ target_link_libraries(blas)
++set_target_properties(blas PROPERTIES
++    VERSION ${LAPACK_VERSION}
++    SOVERSION ${CPACK_PACKAGE_VERSION_MAJOR}
++)
+ lapack_install_library(blas)
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 56ecd2e61e5f..8d3187fe8a2c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,5 +1,9 @@
+ cmake_minimum_required(VERSION 2.8)
+ project(LAPACK Fortran)
++set(LAPACK_VERSION 3.4.2)
++set(CPACK_PACKAGE_VERSION_MAJOR 3)
++set(CPACK_PACKAGE_VERSION_MINOR 4)
++set(CPACK_PACKAGE_VERSION_PATCH 2)
+ 
+ # Configure the warning and code coverage suppression file
+ configure_file( 
+@@ -217,10 +221,6 @@ endif(LAPACKE)
+ SET(CPACK_PACKAGE_NAME "LAPACK")
+ SET(CPACK_PACKAGE_VENDOR "University of Tennessee, Univ. of California Berkeley, Univ. of Colorado Denver and NAG Ltd")
+ SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "LAPACK- Linear Algebra Package")
+-set(LAPACK_VERSION 3.4.2)
+-set(CPACK_PACKAGE_VERSION_MAJOR 3)
+-set(CPACK_PACKAGE_VERSION_MINOR 4)
+-set(CPACK_PACKAGE_VERSION_PATCH 2)
+ set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+ SET(CPACK_PACKAGE_INSTALL_DIRECTORY "LAPACK")
+ IF(WIN32 AND NOT UNIX)
+diff --git a/SRC/CMakeLists.txt b/SRC/CMakeLists.txt
+index d618d6e012a6..52c48256e619 100644
+--- a/SRC/CMakeLists.txt
++++ b/SRC/CMakeLists.txt
+@@ -432,4 +432,8 @@ list(REMOVE_DUPLICATES ALLOBJ)
+ 
+ add_library(lapack ${ALLOBJ} ${ALLXOBJ})
+ target_link_libraries(lapack ${BLAS_LIBRARIES} ${XBLAS_LIBRARY})
++set_target_properties(lapack PROPERTIES
++  VERSION ${LAPACK_VERSION}
++  SOVERSION ${CPACK_PACKAGE_VERSION_MAJOR}
++)
+ lapack_install_library(lapack)

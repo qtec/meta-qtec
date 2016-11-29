@@ -1,0 +1,16 @@
+diff --git a/common/lib/modules/fglrx/build_mod/firegl_public.h b/common/lib/modules/fglrx/build_mod/firegl_public.h
+index cb6ef1e67461..b8cad1d125bc 100755
+--- a/common/lib/modules/fglrx/build_mod/firegl_public.h
++++ b/common/lib/modules/fglrx/build_mod/firegl_public.h
+@@ -646,6 +646,11 @@ extern unsigned long        KCL_SYSINFO_TimerTicksPerSecond;
+ #define MSR_IA32_CR_PAT     0x277
+ #endif
+ 
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4,7,0)
++#define cpu_has_pat  boot_cpu_has(X86_FEATURE_PAT)
++#define cpu_has_pge  boot_cpu_has(X86_FEATURE_PGE)
++#endif
++
+ #ifndef cpu_has_pat
+ #define cpu_has_pat  test_bit(X86_FEATURE_PAT, (void *) &boot_cpu_data.x86_capability)
+ #endif

@@ -1,0 +1,30 @@
+#Obtain properties with udevadm info -a -p /sys/class/video4linux/video0
+#WARNING! In rules you can only refer one parent!a
+
+# Dual eye single head camera
+SUBSYSTEM=="video4linux", ATTR{name}=="qt5023_video", KERNELS=="*left", DRIVERS=="qt5023_video", SYMLINK+="qt5023_video_left", SYMLINK+="qt5023_video0", GOTO="qtec_end"
+SUBSYSTEM=="video4linux", ATTR{name}=="qt5023_video", KERNELS=="*right", DRIVERS=="qt5023_video", SYMLINK+="qt5023_video_right", SYMLINK+="qt5023_video1", GOTO="qtec_end"
+
+# Single eye head on pci bus 0
+SUBSYSTEM=="video4linux", ATTR{name}=="qt5023_video", KERNELS=="0000:01:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_video0"
+SUBSYSTEM=="video4linux", ATTR{name}=="qtec_xform", ATTR{index}=="0", KERNELS=="0000:01:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_xform_dist0"
+SUBSYSTEM=="video4linux", ATTR{name}=="qtec_xform", ATTR{index}=="1", KERNELS=="0000:01:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_xform_gain0"
+SUBSYSTEM=="video4linux", ATTR{name}=="qtec_xform", ATTR{index}=="2", KERNELS=="0000:01:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_xform_dist_readback0"
+SUBSYSTEM=="video4linux", ATTR{name}=="qtec_xform", ATTR{index}=="3", KERNELS=="0000:01:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_xform_gain_readback0"
+SUBSYSTEM=="video4linux", ATTR{name}=="qtec_testgen", KERNELS=="0000:01:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_testgen0"
+# Single eye head on pci bus 2
+SUBSYSTEM=="video4linux", ATTR{name}=="qt5023_video", KERNELS=="0000:02:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_video1"
+SUBSYSTEM=="video4linux", ATTR{name}=="qtec_xform", ATTR{index}=="0", KERNELS=="0000:02:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_xform_dist1"
+SUBSYSTEM=="video4linux", ATTR{name}=="qtec_xform", ATTR{index}=="1", KERNELS=="0000:02:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_xform_gain1"
+SUBSYSTEM=="video4linux", ATTR{name}=="qtec_xform", ATTR{index}=="2", KERNELS=="0000:02:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_xform_dist_readback1"
+SUBSYSTEM=="video4linux", ATTR{name}=="qtec_xform", ATTR{index}=="3", KERNELS=="0000:02:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_xform_gain_readback1"
+SUBSYSTEM=="video4linux", ATTR{name}=="qtec_testgen", KERNELS=="0000:02:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_testgen1"
+# Single eye head on pci bus 2
+SUBSYSTEM=="video4linux", ATTR{name}=="qt5023_video", KERNELS=="0000:03:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_video2"
+SUBSYSTEM=="video4linux", ATTR{name}=="qtec_xform", ATTR{index}=="0", KERNELS=="0000:03:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_xform_dist2"
+SUBSYSTEM=="video4linux", ATTR{name}=="qtec_xform", ATTR{index}=="1", KERNELS=="0000:03:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_xform_gain2"
+SUBSYSTEM=="video4linux", ATTR{name}=="qtec_xform", ATTR{index}=="2", KERNELS=="0000:03:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_xform_dist_readback2"
+SUBSYSTEM=="video4linux", ATTR{name}=="qtec_xform", ATTR{index}=="3", KERNELS=="0000:03:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_xform_gain_readback2"
+SUBSYSTEM=="video4linux", ATTR{name}=="qtec_testgen", KERNELS=="0000:03:00.0", DRIVERS=="qt5023", SYMLINK+="qt5023_testgen2"
+
+LABEL="qtec_end"

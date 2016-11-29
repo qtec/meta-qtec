@@ -1,0 +1,52 @@
+--- 1/common/lib/modules/fglrx/build_mod/2.6.x/Makefile	2012-07-18 17:05:27.712469511 +0200
++++ 2/common/lib/modules/fglrx/build_mod/2.6.x/Makefile	2012-07-18 17:05:45.928373605 +0200
+@@ -68,39 +68,20 @@
+                 -DFGL_GART_RESERVED_SLOT \
+                 -DFGL_LINUX253P1_VMA_API \
+                 -DPAGE_ATTR_FIX=$(PAGE_ATTR_FIX) \
++		-DCOMPAT_ALLOC_USER_SPACE=arch_compat_alloc_user_space \
+ 
+ ifeq ($(KERNELRELEASE),)
+-# on first call from remote location we get into this path
+-# whilst on second call all is managed by the embedding kernel makefile
++	PWD := $(shell pwd)
+ 
+-ifeq ($(KVER),)
+-	KVER        = $(shell uname -r)
+-endif
+-
+-KDIR            = /lib/modules/$(KVER)/build
+-PWD             = $(shell pwd)
+-
+-fglrx-cfiles    = ${fglrx-c-objs:.o=.c}
+-
+-# default:: kmod_build
+-
+-kmod_build:: $(fglrx-libs) $(fglrx-cfiles) $(fglrx-hdrs) $(drm-hdrs)
+-	$(MAKE) -C $(KDIR) SUBDIRS=$(PWD) modules
++default:
++	$(MAKE) -C $(KERNEL_SRC) M=$(PWD) modules
+ 
+-%.c:
+-	@ln -s ../$@
++modules_install:
++	$(MAKE) -C $(KERNEL_SRC) M=$(PWD) modules_install
+ 
+-%.h:
+-	@ln -s ../$@
+-
+-%.a:
+-	@ln -s $(LIBIP_PREFIX)/$@
+-
+-# distclean:: clean
+-
+-clean::
+-	rm -rf *.c *.h *.o *.ko *.a .??* *.symvers
++clean:
++	$(MAKE) -C $(KERNEL_SRC) M=$(PWD) clean
+ 
++%.i: %.c
++	$(MAKE) -C $(KERNEL_SRC) M=$(PWD) $@
+ endif
+-
+-# ### EOF ###

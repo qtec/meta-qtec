@@ -1,0 +1,30 @@
+diff --git a/scripts/jupyter-nbextension b/scripts/jupyter-nbextension
+index 298ecb09f49a..d4d21b3945ee 100644
+--- a/scripts/jupyter-nbextension
++++ b/scripts/jupyter-nbextension
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ from notebook.nbextensions import main
+ 
+diff --git a/scripts/jupyter-notebook b/scripts/jupyter-notebook
+index cc3b5008215f..857961225aff 100644
+--- a/scripts/jupyter-notebook
++++ b/scripts/jupyter-notebook
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ from notebook.notebookapp import main
+ 
+diff --git a/scripts/jupyter-serverextension b/scripts/jupyter-serverextension
+index 79b0b38e8854..594111f51db1 100644
+--- a/scripts/jupyter-serverextension
++++ b/scripts/jupyter-serverextension
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ from notebook.serverextensions import main
+ 

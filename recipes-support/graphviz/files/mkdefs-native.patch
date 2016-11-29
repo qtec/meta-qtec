@@ -1,0 +1,13 @@
+diff --git a/lib/gvpr/Makefile.am b/lib/gvpr/Makefile.am
+index 897c69eb26a9..0aa5470f3e14 100644
+--- a/lib/gvpr/Makefile.am
++++ b/lib/gvpr/Makefile.am
+@@ -57,7 +57,7 @@ endif
+ mkdefs_SOURCES = mkdefs.c
+ 
+ gdefs.h: $(top_srcdir)/lib/gvpr/gprdata mkdefs$(EXEEXT)
+-	./mkdefs$(EXEEXT) gdefs.h < $(top_srcdir)/lib/gvpr/gprdata
++	./mkdefs$(EXEEXT)-native gdefs.h < $(top_srcdir)/lib/gvpr/gprdata
+ 
+ EXTRA_DIST = $(man_MANS) $(pdf_DATA) gprdata mkdefs.c gdefs.h trie.c gvprlib.vcproj
+ 

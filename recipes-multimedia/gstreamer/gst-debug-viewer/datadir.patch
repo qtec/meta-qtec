@@ -1,0 +1,14 @@
+diff --git a/gst-debug-viewer b/gst-debug-viewer
+index 8a8514941758..86c52c6f214f 100755
+--- a/gst-debug-viewer
++++ b/gst-debug-viewer
+@@ -37,6 +37,9 @@ def main ():
+     data_dir = substituted ("$DATADIR$")
+     lib_dir = substituted ("$LIBDIR$")
+ 
++    data_dir = "/usr"
++    lib_dir = None
++
+     if data_dir:
+         installed = True
+     else:

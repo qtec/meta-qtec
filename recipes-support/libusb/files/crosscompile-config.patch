@@ -1,0 +1,23 @@
+diff --git a/libusb-config.in b/libusb-config.in
+index 6fbda43..419dd23 100644
+--- a/libusb-config.in
++++ b/libusb-config.in
+@@ -77,5 +77,5 @@ if test "$echo_cflags" = "yes"; then
+ 	echo $includes
+ fi
+ if test "$echo_libs" = "yes"; then
+-	echo -L$libdir -lusb
++	echo -lusb
+ fi
+diff --git a/libusb.pc.in b/libusb.pc.in
+index add91ab..cc3bbfd 100644
+--- a/libusb.pc.in
++++ b/libusb.pc.in
+@@ -10,6 +10,6 @@ Name: libusb
+ Description: USB access library (libusb-1.0 compat wrapper)
+ Version: @LIBUSB01_VERSION@
+ Requires.private: libusb-1.0
+-Libs: -L${libdir} -lusb
++Libs: -lusb
+ Cflags: -I${includedir}
+ 

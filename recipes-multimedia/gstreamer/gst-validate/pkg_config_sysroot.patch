@@ -1,0 +1,12 @@
+diff --git a/configure.ac b/configure.ac
+index 8e6f4c2d6477..6d43839856ac 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -61,6 +61,7 @@ dnl allow for different autotools
+ AS_AUTOTOOLS_ALTERNATE
+ 
+ dnl Add parameters for aclocal
++m4_pattern_allow(PKG_CONFIG_SYSROOT_DIR)
+ AC_SUBST(ACLOCAL_AMFLAGS, "-I m4 -I common/m4")
+ AC_CONFIG_MACRO_DIR([m4])
+ 

@@ -1,0 +1,13 @@
+diff --git a/pppd/plugins/rp-pppoe/pppoe.h b/pppd/plugins/rp-pppoe/pppoe.h
+index 9ab2eee3914c..96d279477f17 100644
+--- a/pppd/plugins/rp-pppoe/pppoe.h
++++ b/pppd/plugins/rp-pppoe/pppoe.h
+@@ -84,7 +84,7 @@ typedef unsigned long UINT32_t;
+ #include <linux/if_ether.h>
+ #endif
+ 
+-#include <netinet/in.h>
++#include <linux/in.h>
+ 
+ #ifdef HAVE_NETINET_IF_ETHER_H
+ #include <sys/types.h>

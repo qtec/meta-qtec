@@ -1,0 +1,20 @@
+diff --git a/scripts/jupyter b/scripts/jupyter
+index 04743e1d74c5..3c3bbdb14fc5 100755
+--- a/scripts/jupyter
++++ b/scripts/jupyter
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ """Launch the root jupyter command"""
+ 
+ from jupyter_core.command import main
+diff --git a/scripts/jupyter-migrate b/scripts/jupyter-migrate
+index 58548c6f9c3a..7bfff83320db 100755
+--- a/scripts/jupyter-migrate
++++ b/scripts/jupyter-migrate
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ """Migrate Jupyter config from IPython < 4.0"""
+ 
+ from jupyter_core.migrate import main

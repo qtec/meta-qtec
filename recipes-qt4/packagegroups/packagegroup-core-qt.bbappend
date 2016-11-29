@@ -1,0 +1,1 @@
+QTDEMOS_remove += "qmmp"

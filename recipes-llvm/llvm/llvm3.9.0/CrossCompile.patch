@@ -1,0 +1,13 @@
+diff --git a/cmake/modules/CrossCompile.cmake b/cmake/modules/CrossCompile.cmake
+index 9c598a6a07b0..65f2e70626ba 100644
+--- a/cmake/modules/CrossCompile.cmake
++++ b/cmake/modules/CrossCompile.cmake
+@@ -42,7 +42,7 @@ function(llvm_create_cross_target_internal target_name toolchain buildtype)
+       set(build_type_flags "-DCMAKE_BUILD_TYPE=${buildtype}")
+     endif()
+     execute_process(COMMAND ${CMAKE_COMMAND} ${build_type_flags}
+-        -G "${CMAKE_GENERATOR}" -DLLVM_TARGETS_TO_BUILD=${LLVM_TARGETS_TO_BUILD}
++        -G "${CMAKE_GENERATOR}" "-DLLVM_TARGETS_TO_BUILD=${LLVM_TARGETS_TO_BUILD}"
+         ${CROSS_TOOLCHAIN_FLAGS_${target_name}} ${CMAKE_SOURCE_DIR}
+         -DLLVM_TARGET_IS_CROSSCOMPILE_HOST=TRUE
+       WORKING_DIRECTORY ${LLVM_${target_name}_BUILD} )

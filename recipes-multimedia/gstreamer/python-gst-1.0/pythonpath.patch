@@ -1,0 +1,114 @@
+diff --git a/acinclude.m4 b/acinclude.m4
+index c0d1a5eb1608..d0850a6c150a 100644
+--- a/acinclude.m4
++++ b/acinclude.m4
+@@ -58,6 +58,7 @@ else
+     PYTHON_INCLUDES="$PYTHON_INCLUDES -I${py_exec_prefix}/include/python${PYTHON_VERSION}"
+   fi
+ fi
++PYTHON_INCLUDES=`pkg-config --cflags python3`
+ AC_SUBST(PYTHON_INCLUDES)
+ dnl check if the headers exist:
+ save_CPPFLAGS="$CPPFLAGS"
+@@ -104,6 +105,8 @@ else
+   PYTHON_LIB_LOC="${py_prefix}/lib"
+ fi
+ 
++PYTHON_LIBS=`pkg-config --libs python3`
++
+ AC_ARG_WITH([libpython-dir],
+   AS_HELP_STRING([--with-libpython-dir], [the directory containing libpython${PYTHON_VERSION}]),
+   [
+diff --git a/configure.ac b/configure.ac
+index 53233869843d..7d91e550f3e4 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -55,7 +55,7 @@ AM_PROG_CC_C_O
+ 
+ dnl check for python
+ dnl AM_PATH_PYTHON(2.7)
+-AM_PATH_PYTHON
++AM_PATH_PYTHON(3.5)
+ AC_MSG_CHECKING(for python >= 2.7)
+ prog="
+ import sys, string
+@@ -75,7 +75,7 @@ AC_SUBST(GST_LIBS)
+ 
+ 
+ dnl check for pygobject
+-PKG_CHECK_MODULES(PYGOBJECT, pygobject-3.0 >= $PYGOBJECT_REQ)
++PKG_CHECK_MODULES(PYGOBJECT, python3-pygobject-3.0 >= $PYGOBJECT_REQ)
+ AC_SUBST(PYGOBJECT_CFLAGS)
+ 
+ dnl check for python
+diff --git a/gi/overrides/gstmodule.c b/gi/overrides/gstmodule.c
+index 79311a3d09ba..826a6bd4a461 100644
+--- a/gi/overrides/gstmodule.c
++++ b/gi/overrides/gstmodule.c
+@@ -27,7 +27,7 @@
+ 
+ /* include this first, before NO_IMPORT_PYGOBJECT is defined */
+ #include <Python.h>
+-#include <pygobject.h>
++#include <python3-pygobject.h>
+ #include <gst/gst.h>
+ 
+ #include <locale.h>
+diff --git a/plugin/gstpythonplugin.c b/plugin/gstpythonplugin.c
+index 99e6d82fd609..4f51e7784a86 100644
+--- a/plugin/gstpythonplugin.c
++++ b/plugin/gstpythonplugin.c
+@@ -23,10 +23,11 @@
+ #endif
+ 
+ /* include this first, before NO_IMPORT_PYGOBJECT is defined */
+-#include <pygobject.h>
++#include <python3-pygobject.h>
+ #include <gst/gst.h>
+ #include <gmodule.h>
+ #include <Python.h>
++#include <dlfcn.h>
+ 
+ void *_PyGstElement_Type;
+ 
+@@ -213,6 +214,7 @@ plugin_init (GstPlugin * plugin)
+   gboolean we_initialized = FALSE;
+   GModule *libpython;
+   gpointer has_python = NULL;
++  void *handle;
+ 
+   GST_DEBUG_CATEGORY_INIT (pyplugindebug, "pyplugin", 0,
+       "Python plugin loader");
+@@ -232,7 +234,7 @@ plugin_init (GstPlugin * plugin)
+     GST_LOG ("loading libpython");
+     libpython =
+         g_module_open (PY_LIB_LOC "/libpython" PYTHON_VERSION PY_ABI_FLAGS
+-        "." PY_LIB_SUFFIX, 0);
++        "m." PY_LIB_SUFFIX ".1.0", 0);
+     if (!libpython) {
+       g_critical ("Couldn't g_module_open libpython. Reason: %s",
+           g_module_error ());
+@@ -240,6 +242,13 @@ plugin_init (GstPlugin * plugin)
+     }
+   }
+ 
++  handle = dlopen(PY_LIB_LOC "/libpython" PYTHON_VERSION PY_ABI_FLAGS "m." PY_LIB_SUFFIX ".1.0" , RTLD_NOW|RTLD_GLOBAL);
++  if (!handle) {
++	  g_critical( "Error loading libpython: %s\n", dlerror());
++	  return FALSE;
++  }
++
++
+   if (!Py_IsInitialized ()) {
+     GST_LOG ("python wasn't initialized");
+     /* set the correct plugin for registering stuff */
+diff --git a/testsuite/old/testhelpermodule.c b/testsuite/old/testhelpermodule.c
+index 1325262ade14..b73598594cf4 100644
+--- a/testsuite/old/testhelpermodule.c
++++ b/testsuite/old/testhelpermodule.c
+@@ -1,4 +1,4 @@
+-#include "pygobject.h"
++#include "python3-pygobject.h"
+ #include "test-object.h"
+ 
+ #include <gst/gst.h>

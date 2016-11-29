@@ -1,0 +1,50 @@
+diff --git a/common/lib/modules/fglrx/build_mod/firegl_public.c b/common/lib/modules/fglrx/build_mod/firegl_public.c
+index b47f8eeb689d..001498ab8e9a 100755
+--- a/common/lib/modules/fglrx/build_mod/firegl_public.c
++++ b/common/lib/modules/fglrx/build_mod/firegl_public.c
+@@ -3225,10 +3225,14 @@ int ATI_API_CALL KCL_TestAndClearPageDirtyFlag(unsigned long virtual_addr, unsig
+  */
+ int ATI_API_CALL KCL_LockUserPages(unsigned long vaddr, unsigned long* page_list, unsigned int page_cnt)
+ {
+-    int ret;
++    int ret=0;
+ 
+     down_read(&current->mm->mmap_sem);
+-    ret = get_user_pages(current, current->mm, vaddr, page_cnt, 1, 0, (struct page **)page_list, NULL);
++    ret = get_user_pages(
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4,6,0)
++		current, current->mm,
++#endif
++		vaddr, page_cnt, 1, 0, (struct page **)page_list, NULL);
+     up_read(&current->mm->mmap_sem);
+ 
+     return ret;
+@@ -3243,10 +3247,14 @@ int ATI_API_CALL KCL_LockUserPages(unsigned long vaddr, unsigned long* page_list
+  */
+ int ATI_API_CALL KCL_LockReadOnlyUserPages(unsigned long vaddr, unsigned long* page_list, unsigned int page_cnt)
+ {
+-    int ret;
++    int ret=0;
+ 
+     down_read(&current->mm->mmap_sem);
+-    ret = get_user_pages(current, current->mm, vaddr, page_cnt, 0, 0, (struct page **)page_list, NULL);
++    ret = get_user_pages(
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4,6,0)
++	current, current->mm;
++#endif
++	vaddr, page_cnt, 0, 0, (struct page **)page_list, NULL);
+     up_read(&current->mm->mmap_sem);
+ 
+     return ret;
+@@ -3257,7 +3265,11 @@ void ATI_API_CALL KCL_UnlockUserPages(unsigned long* page_list, unsigned int pag
+     unsigned int i;
+     for (i=0; i<page_cnt; i++)
+     {
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4,6,0)
+         page_cache_release((struct page*)page_list[i]);
++#else
++        put_page((struct page*)page_list[i]);
++#endif
+     }
+ }
+ 

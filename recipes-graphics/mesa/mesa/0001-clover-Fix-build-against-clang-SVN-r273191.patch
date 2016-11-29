@@ -1,0 +1,32 @@
+From 82e0bbd01abfb2073519941d9893fa6ac05fb58c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Vedran=20Mileti=C4=87?= <vedran@miletic.net>
+Date: Tue, 21 Jun 2016 01:17:49 +0200
+Subject: [PATCH] clover: Fix build against clang SVN >= r273191
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+setLangDefaults() now requires PreprocessorOptions as an argument.
+
+Reviewed-and-Tested-by: Michel Dänzer <michel.daenzer@amd.com>
+Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+---
+ src/gallium/state_trackers/clover/llvm/invocation.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/gallium/state_trackers/clover/llvm/invocation.cpp b/src/gallium/state_trackers/clover/llvm/invocation.cpp
+index e2cadda64cfe..57eaaaa9bab2 100644
+--- a/src/gallium/state_trackers/clover/llvm/invocation.cpp
++++ b/src/gallium/state_trackers/clover/llvm/invocation.cpp
+@@ -207,7 +207,7 @@ namespace {
+       c.getDiagnosticOpts().ShowCarets = false;
+       c.getInvocation().setLangDefaults(c.getLangOpts(), clang::IK_OpenCL,
+ #if HAVE_LLVM >= 0x0309
+-                                        llvm::Triple(triple),
++                                        llvm::Triple(triple), c.getPreprocessorOpts(),
+ #endif
+                                         clang::LangStandard::lang_opencl11);
+       c.createDiagnostics(
+-- 
+2.8.1
+

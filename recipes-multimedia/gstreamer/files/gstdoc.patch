@@ -1,0 +1,11 @@
+diff --git a/configure.ac b/configure.ac
+index 829f4028efba..17eea385e997 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -105,4 +105,6 @@ AC_CONFIG_FILES([
+   ios/Makefile
+ ])
+ 
++GTK_DOC_CHECK([1.18],[--flavour no-tmpl])
++
+ AC_OUTPUT

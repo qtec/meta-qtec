@@ -1,0 +1,14 @@
+diff --git a/setupext.py b/setupext.py
+index fc9ff3ec3f77..7e84386fed68 100755
+--- a/setupext.py
++++ b/setupext.py
+@@ -160,7 +160,8 @@ def get_base_dirs():
+         'gnu0': ['/usr'],
+         'aix5': ['/usr/local'],
+         }
+-    return basedir_map.get(sys.platform, ['/usr/local', '/usr'])
++    #return basedir_map.get(sys.platform, ['/usr/local', '/usr'])
++    return []
+ 
+ 
+ def get_include_dirs():

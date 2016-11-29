@@ -1,0 +1,12 @@
+diff --git a/Makefile.am b/Makefile.am
+index a035b92dd7d3..19d917541db5 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -9,7 +9,6 @@ SUBDIRS = 	\
+ 	launcher \
+ 	tools 	\
+ 	pkgconfig 	\
+-	docs    \
+ 	tests    \
+ 	po
+ 

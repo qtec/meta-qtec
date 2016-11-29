@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+
+XSERVER=/usr/bin/Xorg
+
+. /etc/profile
+
+ARGS=" -br -pn"
+
+if lspci  | grep VGA | grep -q Intel
+then
+	ARGS="$ARGS -config xorg.conf.intel"
+fi
+
+n_gpu=$(exec lspci | grep VGA | wc -l)
+if [ $n_gpu"" == 2"" ]
+then
+	ARGS="$ARGS -config xorg.conf.discrete"
+fi
+
+DISPLAY=':0'
+
+exec xinit /etc/X11/Xsession -- $XSERVER $DISPLAY $ARGS $*

@@ -1,0 +1,12 @@
+diff --git a/wscript b/wscript
+index fcbb55b6b530..2e1bfc718aaa 100644
+--- a/wscript
++++ b/wscript
+@@ -121,6 +121,7 @@ def check_x11(conf, uselib = ''):
+ def check_egl(conf, uselib = ''):
+ 	conf.check_cxx(mandatory = 1, lib = 'EGL', uselib = uselib, uselib_store = 'EGL')
+ 	conf.check_cxx(mandatory = 1, header_name = 'EGL/egl.h', uselib = uselib, uselib_store = 'EGL')
++	conf.check_cxx(mandatory = 1, lib = 'dl', uselib = uselib, uselib_store = 'EGL')
+ 
+ def check_openvg(conf, uselib = 'EGL'):
+ 	return \

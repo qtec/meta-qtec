@@ -1,0 +1,12 @@
+diff --git a/src/process_glapi.cpp b/src/process_glapi.cpp
+index 58e10ae83efe..a79707633538 100644
+--- a/src/process_glapi.cpp
++++ b/src/process_glapi.cpp
+@@ -30,6 +30,7 @@ freely, subject to the following restrictions:
+ #include <vector>
+ 
+ #include <EGL/egl.h>
++#include <GL/gl.h>
+ #include "opengl.hpp"
+ 
+ #include "glapi_stats.hpp"

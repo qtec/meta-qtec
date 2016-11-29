@@ -1,0 +1,31 @@
+Section "ServerLayout"
+	Identifier     "aticonfig Layout"
+	Screen      0  "Screen0"
+	Screen         "Screen1"
+EndSection
+
+Section "Device"
+	Identifier  "Device0"
+	Driver      "fglrx"
+	BusID       "PCI:0:1:0"
+EndSection
+
+Section "Device"
+	Identifier  "Device1"
+	Driver      "fglrx"
+	BusID       "PCI:1:0:0"
+EndSection
+
+Section "Screen"
+	Identifier "Screen0"
+	Device     "Device0"
+EndSection
+
+Section "Screen"
+	Identifier "Screen1"
+	Device     "Device1"
+EndSection
+
+Section "ServerFlags"
+	Option        "DontZap"  "0"
+EndSection

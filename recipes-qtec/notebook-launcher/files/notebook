@@ -1,0 +1,43 @@
+#!/bin/bash
+#
+### BEGIN INIT INFO
+# Provides: notebook
+# Required-Start: $local_fs $remote_fs dbus
+# Required-Stop: $local_fs $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+### END INIT INFO
+
+DESC="Notebook"
+PIDFILE=/var/run/notebook.pid
+
+set -e
+
+test ! -r /etc/default/notebook || . /etc/default/notebook
+
+case "$1" in
+  start)
+	  echo "Starting $DESC"
+	  su - qtec -c "jupyter-notebook  --no-browser --port=$PORT --ip=$IP"  2>/var/log/notebook.log &
+	  echo $! > $PIDFILE
+	  echo Done.
+  ;;
+
+  stop)
+       	echo "Stopping $DESC"
+	kill  $(cat $PIDFILE) || true
+       	echo Done.
+  ;;
+
+  restart)
+	$0 stop
+        sleep 1
+        $0 start
+  ;;
+
+  *)
+        echo "usage: $0 { start | stop | restart }"
+  ;;
+esac
+
+exit 0

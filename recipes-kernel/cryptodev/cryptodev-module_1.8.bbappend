@@ -1,0 +1,5 @@
+SRC_URI = "git://github.com/cryptodev-linux/cryptodev-linux.git"
+SRC_URI += "file://0001-Disable-installing-header-file-provided-by-another-p.patch"
+SRCREV = "f116a93224fc7b85f83d2c53f565f8fd86165ecc"
+S = "${WORKDIR}/git"
+FILESEXTRAPATHS_prepend := "${THISDIR}/files:"

@@ -1,0 +1,13 @@
+diff --git a/lib/dpkg/compress.c b/lib/dpkg/compress.c
+index 9386bab9cca6..14f0fdae801d 100644
+--- a/lib/dpkg/compress.c
++++ b/lib/dpkg/compress.c
+@@ -394,7 +394,7 @@ static const struct compressor compressor_bzip2 = {
+  * Xz compressor.
+  */
+ 
+-#define XZ		"xz"
++#define XZ		"pixz"
+ 
+ #ifdef WITH_LIBLZMA
+ enum dpkg_stream_status {

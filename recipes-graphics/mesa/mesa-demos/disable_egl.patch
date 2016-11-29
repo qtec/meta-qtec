@@ -1,0 +1,21 @@
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 8b89dee5d53a..c6356656908b 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -30,7 +30,6 @@ SUBDIRS = \
+ 	$(UTIL) \
+ 	data \
+ 	demos \
+-	egl \
+ 	fp \
+ 	fpglsl \
+ 	glsl \
+@@ -53,3 +52,8 @@ SUBDIRS += \
+ 	vpglsl \
+ 	trivial
+ endif
++
++if HAVE_GLEW
++SUBDIRS += \
++	egl
++endif

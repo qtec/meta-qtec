@@ -1,0 +1,10 @@
+/usr/lib/bellagio/libomx_mesa.so
+ ==> OMX.mesa.video_decoder ==> OMX.mesa.video_decoder.mpeg2:OMX.mesa.video_decoder.avc:
+ ==> OMX.mesa.video_encoder ==> OMX.mesa.video_encoder.avc:
+/usr/lib/bellagio/libomxvideosched.so
+ ==> OMX.st.video.scheduler ==> OMX.st.video.scheduler: ==> 2 1,456192 1,304128
+/usr/lib/bellagio/libomxaudio_effects.so
+ ==> OMX.st.volume.component ==> OMX.st.volume.component: ==> 2 1,65536 1,32768
+ ==> OMX.st.audio.mixer ==> OMX.st.audio.mixer: ==> 1 50,60000
+/usr/lib/bellagio/libomxclocksrc.so
+ ==> OMX.st.clocksrc ==> OMX.st.clocksrc:

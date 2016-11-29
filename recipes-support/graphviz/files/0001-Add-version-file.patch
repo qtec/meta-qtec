@@ -1,0 +1,32 @@
+From e6eb50ec7853a899cf821f063288fd5f005022ec Mon Sep 17 00:00:00 2001
+From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Date: Tue, 1 Mar 2016 16:52:12 +0100
+Subject: [PATCH] Add version file
+
+Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+---
+ version.m4 | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 version.m4
+
+diff --git a/version.m4 b/version.m4
+new file mode 100644
+index 000000000000..284e1cb64f2b
+--- /dev/null
++++ b/version.m4
+@@ -0,0 +1,12 @@
++dnl graphviz package version number, (as distinct from shared library version)
++dnl For the minor number: odd => unstable series
++dnl                       even => stable series
++dnl For the micro number: 0 => in-progress development
++dnl                       timestamp => tar-file snapshot or release
++m4_define(graphviz_version_major, 2)
++m4_define(graphviz_version_minor, 39)
++dnl NB: the next line gets changed to a date/time string for development releases
++m4_define(graphviz_version_micro, 20160229.1613)
++m4_define(graphviz_version_date, 20160229.1613)
++m4_define(graphviz_collection, test)
++m4_define(graphviz_version_commit, unknown)
+-- 
+2.7.0
+

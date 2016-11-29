@@ -1,0 +1,16 @@
+diff --git a/firegl_public.c b/firegl_public.c
+index 7b028e5..464b6a1 100755
+--- a/common/lib/modules/fglrx/build_mod/firegl_public.c
++++ b/common/lib/modules/fglrx/build_mod/firegl_public.c
+@@ -1997,7 +1997,10 @@ int ATI_API_CALL KCL_CopyToUserSpace(void __user * to, const void* from, kcl_siz
+ 
+ void* ATI_API_CALL KCL_MEM_SmallBufferAlloc(kcl_size_t size)
+ {
+-    return kmalloc(size, GFP_KERNEL);
++	if (in_atomic() || irqs_disabled())
++	    return kmalloc(size, GFP_ATOMIC);
++	else
++	    return kmalloc(size, GFP_KERNEL);
+ }
+ 
+ void* ATI_API_CALL KCL_MEM_SmallBufferAllocAtomic(kcl_size_t size)

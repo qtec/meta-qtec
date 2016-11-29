@@ -1,0 +1,13 @@
+diff --git a/gi/Makefile.am b/gi/Makefile.am
+index 2e61af8debfc..dec29e8e0890 100644
+--- a/gi/Makefile.am
++++ b/gi/Makefile.am
+@@ -25,6 +25,8 @@ extension_ldflags += \
+ 	-no-undefined
+ endif
+ 
++extension_libadd = -lpython2.7
++
+ pkgincludedir = $(includedir)/pygobject-$(PLATFORM_VERSION)
+ if WITH_COMMON
+ pkginclude_HEADERS = pygobject.h

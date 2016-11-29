@@ -1,0 +1,12 @@
+diff --git a/Makefile b/Makefile
+index 9871a8eeee45..06202bdbc749 100644
+--- a/Makefile
++++ b/Makefile
+@@ -33,7 +33,6 @@ install: modules_install
+ 
+ modules_install:
+ 	$(MAKE) -C $(KERNEL_DIR) M=$(PWD) modules_install
+-	install -m 644 -D crypto/cryptodev.h $(DESTDIR)/$(includedir)/crypto/cryptodev.h
+ 
+ clean:
+ 	$(MAKE) -C $(KERNEL_DIR) M=$(PWD) clean
