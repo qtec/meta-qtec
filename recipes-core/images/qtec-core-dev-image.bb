@@ -23,9 +23,9 @@ IMAGE_INSTALL += "python3-scipy python3-matplotlib python3-scikit-image"
 #Vision Related Libraries
 IMAGE_INSTALL += "opencv qv4l2 imagemagick"
 #Gstreamer
-IMAGE_INSTALL += "gstreamer1.0 gstreamer1.0-plugins-qtec-core-meta gstreamer1.0-plugins-base-meta gstreamer1.0-plugins-good-meta gstreamer1.0-plugins-bad-meta gstreamer1.0-plugins-ugly-meta"
+IMAGE_INSTALL += "gstreamer1.0 gstreamer1.0-plugins-qtec-core-meta gstreamer1.0-plugins-base-meta gstreamer1.0-plugins-good-meta gstreamer1.0-plugins-bad-meta gstreamer1.0-plugins-ugly-meta python-gst-1.0"
 #Gcc support
-IMAGE_INSTALL += "binutils libgcc-dev gcc-symlinks g++-symlinks libc6-dev eglibc-staticdev make gdb"
+IMAGE_INSTALL += "binutils libgcc-dev gcc-symlinks g++-symlinks libc6-dev eglibc-staticdev make gdb git"
 #Profiling
 IMAGE_INSTALL += "perf gst-instruments"
 
